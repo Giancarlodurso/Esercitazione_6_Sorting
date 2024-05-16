@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -13,8 +12,7 @@ template<typename T>
 void Merge(vector<T>& v,
            const unsigned int& sx,
            const unsigned int& cx,
-           const unsigned int& dx)
-{
+           const unsigned int& dx){
 
     unsigned int i = sx;
     unsigned int j = cx + 1;
@@ -32,7 +30,7 @@ void Merge(vector<T>& v,
 
     if (i <= cx)
         b.insert(b.end(), v.begin() + i, v.begin() + cx + 1);
-    if (j <= dx)
+    if ( j <= dx)
         b.insert(b.end(), v.begin() + j, v.begin() + dx + 1);
 
     copy(b.begin(), b.end(), v.begin() + sx);
@@ -42,8 +40,7 @@ void Merge(vector<T>& v,
 template<typename T>
 void MergeSort(vector<T>& v,
                const unsigned int& sx,
-               const unsigned int& dx)
-{
+               const unsigned int& dx){
 
     if (sx < dx)
     {
@@ -56,9 +53,14 @@ void MergeSort(vector<T>& v,
 
 }
 
+template<typename T>
+void MergeSort(vector<T>& v){
+    MergeSort(v, 0, v.size()-1);
+}
+
 
 template<typename T>
-void BubbleSort(vector<T>& data)
+void BubbleSort(std::vector<T>& data)
 {
     size_t rem_size = data.size();
     size_t last_seen = rem_size;
@@ -73,38 +75,12 @@ void BubbleSort(vector<T>& data)
                 last_seen = i;
             }
         }
-        //        rem_size = rem_size - 1;
+//        rem_size = rem_size - 1;
         rem_size = last_seen;
     }
 }
 
-vector<vector<int>> PartialSort(vector<int>& v)
-{
-    int n = v.size();
-    int meta = v.size();    //partial sort limit
-    vector<vector<int>> vettori = {};
-
-    vettori.push_back(v);
-
-    for (int i = 0; i < meta; ++i)
-    {
-        int min_id = i;
-        for (int j = i + 1; j < n; ++j)
-        {
-            if (v[j] < v[min_id])
-            {
-                min_id = j;
-            }
-        }
-
-        swap(v[i], v[min_id]);
-        vettori.push_back(v);
-
-    }
-
-    return vettori;
 }
 
-}
 
 #endif // __SORTING_ALGORITHM_H
